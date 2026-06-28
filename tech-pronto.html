@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+<title>Elloqio · protótipo (amostra offline)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B2D4D; --navy-2:#14405F; --teal:#2DE2C5; --teal-deep:#0B7B67; --amber:#FFB84D;
+    --bg:#F5F9FB; --card:#FFFFFF; --line:#E3EBEC; --text:#0E2B3D; --slate:#3D515E; --muted:#647985;
+    --fd:'Sora',system-ui,sans-serif; --fb:'Inter',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--fb);line-height:1.55;}
+  h1,h2,h3{font-family:var(--fd);margin:0;line-height:1.15;letter-spacing:-0.01em;}
+  .top{background:var(--navy);color:#fff;padding:14px 18px;display:flex;align-items:center;gap:11px;}
+  .top .nm{font-family:var(--fd);font-weight:800;font-size:18px;}
+  .top .nm b{color:var(--teal);}
+  .badge{margin-left:auto;font-size:11px;font-weight:600;color:var(--teal);border:1px solid rgba(45,226,197,0.5);border-radius:999px;padding:4px 10px;}
+  .wrap{max-width:680px;margin:0 auto;padding:20px 18px 60px;}
+  .muted{color:var(--muted);}
+  .note{background:var(--amber);color:#5b3d06;font-size:12.5px;font-weight:500;padding:8px 14px;text-align:center;}
+
+  .bar{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+  .bar h2{font-size:19px;}
+  .iconbtn{background:var(--card);border:1px solid var(--line);border-radius:10px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);}
+
+  .modecard{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:12px;cursor:pointer;font-family:inherit;}
+  .modecard:hover{border-color:var(--teal);}
+  .modecard .ic{width:46px;height:46px;border-radius:12px;background:rgba(45,226,197,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .modecard h3{font-size:17px;}
+  .modecard p{margin:3px 0 0;font-size:13.5px;color:var(--slate);}
+
+  .pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;}
+  .pill{font-size:13px;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--slate);cursor:pointer;font-family:inherit;}
+  .pill.on{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+  .flash{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:34px 22px;text-align:center;min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;user-select:none;}
+  .flash .en{font-family:var(--fd);font-weight:700;font-size:30px;}
+  .flash .pt{font-size:23px;color:var(--teal-deep);font-weight:600;}
+  .flash .hint{font-size:12px;color:var(--muted);margin-top:14px;}
+  .flash .ex{font-size:14px;color:var(--slate);margin-top:10px;max-width:90%;}
+  .row{display:flex;gap:10px;align-items:center;margin-top:14px;}
+  .btn{font-family:var(--fd);font-weight:600;font-size:15px;border:none;border-radius:11px;padding:12px 18px;cursor:pointer;}
+  .btn-nav{flex:1;background:var(--card);border:1px solid var(--line);color:var(--text);}
+  .btn-teal{background:var(--teal);color:var(--navy);}
+  .counter{text-align:center;font-size:13px;color:var(--muted);margin-top:12px;}
+  .spk{background:rgba(45,226,197,0.14);border:none;color:var(--teal-deep);width:42px;height:42px;border-radius:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:14px;}
+  .q .prompt{font-family:var(--fd);font-weight:700;font-size:21px;margin-bottom:14px;}
+  .opt{display:block;width:100%;text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:11px;padding:13px 15px;margin-bottom:9px;font-size:15px;cursor:pointer;font-family:inherit;color:var(--text);}
+  .opt.ok{background:rgba(45,226,197,0.18);border-color:var(--teal);}
+  .opt.no{background:rgba(192,57,43,0.10);border-color:#C0392B;}
+  .result{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 20px;}
+  .result .big{font-family:var(--fd);font-weight:800;font-size:46px;color:var(--teal-deep);}
+
+  .turn{margin-bottom:16px;}
+  .ask{background:var(--navy);color:#fff;border-radius:14px 14px 14px 4px;padding:14px 16px;font-size:15px;}
+  .ask .pt{color:#AEC6D4;font-size:13px;margin-top:5px;}
+  .ans{background:var(--card);border:1px solid var(--line);border-radius:14px 14px 4px 14px;padding:14px 16px;margin-top:8px;margin-left:22px;}
+  .ans .lbl{font-size:11px;font-weight:600;color:var(--teal-deep);text-transform:uppercase;letter-spacing:0.04em;}
+  .ans .en{font-size:15px;margin-top:4px;}
+  .ans .pt{font-size:13px;color:var(--slate);margin-top:5px;}
+  .ans .row{margin-top:8px;}
+  @media (prefers-color-scheme: dark){
+    :root{--bg:#0A1722;--card:#13242F;--line:#24333E;--text:#EAF2F5;--slate:#AEBFC9;--muted:#8597A2;--teal-deep:#3FE0C8;}
+  }
+</style>
+</head>
+<body>
+<div class="top">
+  <svg width="30" height="30" viewBox="0 0 220 220" fill="none" aria-hidden="true">
+    <path d="M162 0H58C25.97 0 0 25.97 0 58V162C0 194.03 25.97 220 58 220H162C194.03 220 220 194.03 220 162V58C220 25.97 194.03 0 162 0Z" fill="#0B2D4D"/>
+    <path opacity="0.55" d="M40 191C60 166 88 159 118 164C148 169 170 152 182 124" stroke="#D9E7EF" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="40" cy="191" r="9" fill="#FFB84D"/><circle cx="75" cy="166" r="8" fill="#2DE2C5"/><circle cx="138" cy="164" r="8" fill="#fff"/><circle cx="182" cy="124" r="9" fill="#FFB84D"/>
+    <path d="M44 48C44 28.67 59.67 13 79 13H142C161.33 13 177 28.67 177 48V89C177 108.33 161.33 124 142 124H111L74 154V124C57.43 121.53 44 107.24 44 90V48Z" fill="#2DE2C5"/>
+    <path d="M81 69L111 39L141 69M111 42V96" stroke="#0B2D4D" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span class="nm">Elloqio</span>
+  <span class="badge">amostra offline</span>
+</div>
+<div class="note">Protótipo ilustrativo para você entender a plataforma. No app completo, a IA conversa e corrige em tempo real.</div>
+<div class="wrap"><div id="app"></div></div>
+
+<script>
+const VOCAB = {
+  "Programação": [
+    {en:"Code",pt:"Código",ex:"Write clean code that is easy to read."},
+    {en:"Bug",pt:"Bug / erro",ex:"I found a bug in the login page."},
+    {en:"Debug",pt:"Depurar",ex:"Let's debug this function together."},
+    {en:"Function",pt:"Função",ex:"This function returns the total."},
+    {en:"Variable",pt:"Variável",ex:"Give the variable a clear name."},
+    {en:"Deploy",pt:"Publicar / implantar",ex:"We deploy new code every Friday."},
+    {en:"Framework",pt:"Framework",ex:"We build the app with a modern framework."},
+    {en:"Repository",pt:"Repositório",ex:"Push your changes to the repository."}
+  ],
+  "Dados & Banco de Dados": [
+    {en:"Database",pt:"Banco de dados",ex:"The data is stored in the database."},
+    {en:"Query",pt:"Consulta (query)",ex:"Run a query to get last month's sales."},
+    {en:"Table",pt:"Tabela",ex:"Each table has rows and columns."},
+    {en:"Dataset",pt:"Conjunto de dados",ex:"Clean the dataset before analysis."},
+    {en:"Dashboard",pt:"Painel (dashboard)",ex:"I built a dashboard to track the KPIs."},
+    {en:"Report",pt:"Relatório",ex:"Send the weekly report to the team."},
+    {en:"Backup",pt:"Backup / cópia",ex:"Always keep a backup of the data."},
+    {en:"Schema",pt:"Esquema (schema)",ex:"The schema defines the data structure."}
+  ],
+  "Equipe Ágil": [
+    {en:"Sprint",pt:"Sprint (ciclo)",ex:"This task is for the next sprint."},
+    {en:"Standup / daily",pt:"Reunião diária",ex:"We have a quick standup every morning."},
+    {en:"Deadline",pt:"Prazo",ex:"The deadline is end of the week."},
+    {en:"Task",pt:"Tarefa",ex:"I finished my task early."},
+    {en:"Ticket",pt:"Chamado / ticket",ex:"Open a ticket for that bug."},
+    {en:"Code review",pt:"Revisão de código",ex:"Please do a code review on my pull request."},
+    {en:"Merge",pt:"Mesclar (merge)",ex:"Merge your branch after the review."},
+    {en:"Backlog",pt:"Backlog (pendências)",ex:"That feature is still in the backlog."}
+  ]
+};
+const CATS = Object.keys(VOCAB);
+const ALL = CATS.flatMap(c=>VOCAB[c]);
+
+const IV = [
+  {q:"Hi! Thanks for joining. Can you tell me a little about your experience with software development?",
+   qpt:"Oi! Obrigado por vir. Pode me contar um pouco sobre sua experiência com desenvolvimento de software?",
+   a:"Sure. For two years I've built features in JavaScript and React. I write and test my code, fix bugs, and review my teammates' pull requests.",
+   apt:"Claro. Por dois anos construí funcionalidades em JavaScript e React. Escrevo e testo meu código, corrijo bugs e reviso o código dos colegas."},
+  {q:"Nice. How do you handle a bug you can't solve right away?",
+   qpt:"Legal. Como você lida com um bug que não consegue resolver de imediato?",
+   a:"First I try to reproduce it and read the error logs. If I'm still stuck, I ask a teammate in our daily standup and we debug it together.",
+   apt:"Primeiro tento reproduzir e leio os logs de erro. Se ainda travo, peço ajuda a um colega na reunião diária e depuramos juntos."},
+  {q:"Tell me about a time you worked under a tight deadline.",
+   qpt:"Conte sobre uma vez em que você trabalhou com um prazo apertado.",
+   a:"In my last sprint a feature was due on Friday. I broke the task into smaller parts, did the most important first, and deployed it on time.",
+   apt:"No meu último sprint, uma funcionalidade vencia na sexta. Quebrei a tarefa em partes menores, fiz a mais importante primeiro e publiquei no prazo."},
+  {q:"Great. Why do you want to work for a company abroad?",
+   qpt:"Ótimo. Por que você quer trabalhar em uma empresa no exterior?",
+   a:"I want to grow with a strong engineering team and work on products used by people around the world.",
+   apt:"Quero crescer com um time de engenharia forte e trabalhar em produtos usados por pessoas no mundo todo."}
+];
+
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=0.9;speechSynthesis.speak(u);}catch(e){}}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const SPK='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>';
+const BACK='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>';
+
+const S={vCat:CATS[0],vIdx:0,vFlip:false,qList:[],qIdx:0,qPick:null,qScore:0};
+const app=document.getElementById("app");
+function set(h){app.innerHTML=h;scrollTo(0,0);}
+
+function home(){
+  location.hash="";
+  const cards=[
+    {id:"vocab",t:"Vocabulário técnico",d:"Flashcards com termos reais de tech: programação, dados e times ágeis."},
+    {id:"quiz",t:"Quiz de tradução",d:"Teste rápido com pontuação. Escolha a tradução certa."},
+    {id:"entrevista",t:"Entrevista (exemplo)",d:"Veja um exemplo de entrevista técnica em inglês, com tradução e áudio."}
+  ];
+  set('<h2 style="font-size:22px;margin-bottom:6px">O que você quer experimentar?</h2>'+
+    '<p class="muted" style="margin:0 0 18px;font-size:14px">Amostra offline — sem login, sem custo.</p>'+
+    cards.map(c=>'<button class="modecard" data-go="'+c.id+'"><span class="ic">'+icon(c.id)+'</span><span><h3>'+c.t+'</h3><p>'+c.d+'</p></span></button>').join(''));
+}
+function icon(id){
+  if(id==="vocab")return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B7B67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
+  if(id==="quiz")return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B7B67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
+  return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B7B67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+}
+function topbar(title){return '<div class="bar"><button class="iconbtn" data-go="home">'+BACK+'</button><h2>'+esc(title)+'</h2></div>';}
+
+function vocab(){
+  location.hash="vocab";
+  const list=VOCAB[S.vCat],c=list[S.vIdx];
+  set(topbar("Vocabulário técnico")+
+    '<div class="pills">'+CATS.map(cat=>'<button class="pill'+(cat===S.vCat?' on':'')+'" data-cat="'+esc(cat)+'">'+esc(cat)+'</button>').join('')+'</div>'+
+    '<div class="flash" data-flip>'+
+      (!S.vFlip
+        ? '<div class="en">'+esc(c.en)+'</div><div class="hint">toque para ver a tradução</div>'
+        : '<div class="pt">'+esc(c.pt)+'</div><div class="ex">"'+esc(c.ex)+'"</div><div class="hint">toque para voltar</div>')+
+    '</div>'+
+    '<div class="row"><button class="btn btn-nav" data-v="prev">‹ Anterior</button>'+
+      '<button class="spk" data-spk="'+esc(c.en)+'" title="Ouvir">'+SPK+'</button>'+
+      '<button class="btn btn-nav" data-v="next">Próximo ›</button></div>'+
+    '<div class="counter">'+(S.vIdx+1)+' / '+list.length+'</div>');
+}
+
+function quizHome(){
+  location.hash="quiz";
+  set(topbar("Quiz de tradução")+
+    '<p class="muted" style="margin:0 0 16px;font-size:14px">Escolha o conjunto de termos:</p>'+
+    '<button class="modecard" data-q="__all__"><span class="ic">'+icon("quiz")+'</span><span><h3>Todos os termos</h3><p>'+ALL.length+' termos das 3 categorias</p></span></button>'+
+    CATS.map(cat=>'<button class="modecard" data-q="'+esc(cat)+'"><span class="ic">'+icon("quiz")+'</span><span><h3>'+esc(cat)+'</h3><p>'+VOCAB[cat].length+' termos</p></span></button>').join(''));
+}
+function buildQuiz(pool){
+  return shuffle(pool).slice(0,6).map(term=>{
+    const dir=Math.random()<0.5?"en2pt":"pt2en";
+    const prompt=dir==="en2pt"?term.en:term.pt;
+    const correct=dir==="en2pt"?term.pt:term.en;
+    const distract=shuffle(ALL.filter(t=>t.en!==term.en)).slice(0,3).map(t=>dir==="en2pt"?t.pt:t.en);
+    return {prompt,correct,dir,options:shuffle([correct,...distract])};
+  });
+}
+function startQuiz(scope){const pool=scope==="__all__"?ALL:VOCAB[scope];S.qList=buildQuiz(pool);S.qIdx=0;S.qPick=null;S.qScore=0;quiz();}
+function quiz(){
+  if(S.qIdx>=S.qList.length){
+    const pct=Math.round(S.qScore/S.qList.length*100);
+    const msg=pct>=80?"Excelente! Você está afiado.":pct>=50?"Bom trabalho. Siga praticando!":"Continue treinando — melhora rápido.";
+    set(topbar("Resultado")+'<div class="result"><div class="big">'+S.qScore+'/'+S.qList.length+'</div><p style="margin:8px 0 18px">'+msg+'</p><button class="btn btn-teal" data-go="quiz">Tentar de novo</button></div>');
+    return;
+  }
+  const q=S.qList[S.qIdx],answered=S.qPick!==null;
+  set(topbar("Quiz · "+(S.qIdx+1)+"/"+S.qList.length)+
+    '<div class="q"><div class="muted" style="font-size:12.5px;margin-bottom:6px">'+(q.dir==="en2pt"?"Traduza para o português:":"Traduza para o inglês:")+'</div>'+
+    '<div class="prompt">'+esc(q.prompt)+'</div>'+
+    q.options.map(opt=>{let cls="opt";if(answered){if(opt===q.correct)cls+=" ok";else if(opt===S.qPick)cls+=" no";}return '<button class="'+cls+'" data-opt="'+esc(opt)+'"'+(answered?" disabled":"")+'>'+esc(opt)+'</button>';}).join('')+
+    '</div>'+(answered?'<button class="btn btn-teal" style="width:100%" data-q="next">Continuar ›</button>':''));
+}
+
+function interview(){
+  location.hash="entrevista";
+  set(topbar("Entrevista · exemplo")+
+    '<p class="muted" style="margin:0 0 18px;font-size:14px">Exemplo ilustrativo de uma entrevista técnica. No app completo, você responde e a IA corrige o seu inglês em tempo real.</p>'+
+    IV.map(t=>'<div class="turn">'+
+      '<div class="ask">'+esc(t.q)+'<button class="spk" data-spk="'+esc(t.q)+'" style="width:30px;height:30px;float:right;margin:-2px 0 0 8px" title="Ouvir">'+SPK+'</button><div class="pt">'+esc(t.qpt)+'</div></div>'+
+      '<div class="ans"><div class="lbl">resposta-modelo</div><div class="en">'+esc(t.a)+'</div><div class="pt">'+esc(t.apt)+'</div>'+
+        '<div class="row"><button class="spk" data-spk="'+esc(t.a)+'" title="Ouvir">'+SPK+'</button></div></div>'+
+    '</div>').join(''));
+}
+
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-go],[data-cat],[data-v],[data-spk],[data-q],[data-opt],[data-flip]");
+  if(!t)return;
+  if(t.dataset.spk!==undefined){speak(t.dataset.spk);return;}
+  if(t.dataset.go!==undefined){const g=t.dataset.go;if(g==="home")home();else if(g==="vocab")vocab();else if(g==="quiz")quizHome();else if(g==="entrevista")interview();return;}
+  if(t.dataset.flip!==undefined){S.vFlip=!S.vFlip;vocab();return;}
+  if(t.dataset.cat!==undefined){S.vCat=t.dataset.cat;S.vIdx=0;S.vFlip=false;vocab();return;}
+  if(t.dataset.v!==undefined){const n=VOCAB[S.vCat].length;S.vIdx=t.dataset.v==="next"?(S.vIdx+1)%n:(S.vIdx-1+n)%n;S.vFlip=false;vocab();return;}
+  if(t.dataset.q!==undefined){if(t.dataset.q==="next"){S.qIdx++;S.qPick=null;quiz();}else startQuiz(t.dataset.q);return;}
+  if(t.dataset.opt!==undefined){if(S.qPick!==null)return;S.qPick=t.dataset.opt;if(t.dataset.opt===S.qList[S.qIdx].correct)S.qScore++;quiz();return;}
+});
+
+function route(){const h=location.hash.replace("#","");if(h==="vocab")vocab();else if(h==="quiz")quizHome();else if(h==="entrevista")interview();else home();}
+route();
+</script>
+</body>
+</html>
