@@ -6,6 +6,8 @@
 <meta name="color-scheme" content="light dark" />
 <title>Elloqio — inglês para vagas internacionais de tech</title>
 <meta name="description" content="Pesquisa de intenção: um app para treinar inglês e se preparar para processos seletivos internacionais. Conte se isso faz sentido para você." />
+<meta name="theme-color" content="#0B2D4D" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src https://formspree.io; form-action 'self' https://formspree.io;" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -93,7 +95,28 @@
   .privacy{font-size:12.5px;color:var(--muted);max-width:640px;margin:30px auto 0;line-height:1.6;text-align:center;}
   footer{background:var(--navy);color:#9FB6C1;font-size:13px;padding:26px 0;margin-top:50px;text-align:center;}
   footer .name{font-family:var(--fd);font-weight:700;color:#fff;}
-  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+
+  /* a11y */
+  .skip-link{position:absolute;left:-9999px;top:8px;background:var(--teal);color:var(--navy);font-family:var(--fd);font-weight:700;padding:10px 16px;border-radius:10px;z-index:50;}
+  .skip-link:focus{left:12px;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  :focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:6px;}
+
+  /* botão secundário (no hero) */
+  .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.45);}
+  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,0.08);}
+
+  /* barra de progresso do formulário */
+  .progress{margin-top:22px;}
+  .progress-track{height:7px;border-radius:999px;background:var(--line);overflow:hidden;}
+  .progress-bar{height:100%;width:0;background:var(--teal);transition:width .25s ease;}
+  .progress-txt{font-size:12.5px;color:var(--muted);margin:7px 0 0;}
+  input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#C0392B;box-shadow:0 0 0 3px rgba(192,57,43,0.14);}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important;}
+  }
   @media (prefers-color-scheme: dark){
     :root{
       --bg:#0A1722; --card:#13242F; --line:#24333E;
@@ -106,7 +129,9 @@
 </head>
 <body>
 
-<div class="hero">
+<a href="#main" class="skip-link">Pular para o conteúdo</a>
+
+<header class="hero">
   <div class="wrap">
     <nav>
       <div class="brand">
@@ -130,9 +155,10 @@
         <h1>Fale o inglês que as <span class="teal">vagas internacionais de tech</span> exigem.</h1>
         <p class="sub">Entrevistas técnicas simuladas, conversação e o vocabulário do dia a dia de tecnologia — em português, no seu ritmo, com IA. Treine para a entrevista que pode mudar sua carreira.</p>
         <div class="cta-row">
-          <a href="#entrar" class="btn btn-primary">Responder à pesquisa</a>
-          <span class="hint">Leva 1 minuto · é uma pesquisa de ideia, não uma venda</span>
+          <a href="#experimentar" class="btn btn-primary">Experimentar o protótipo</a>
+          <a href="#entrar" class="btn btn-ghost">Responder à pesquisa</a>
         </div>
+        <p class="hint" style="margin-top:14px;">Leva 1 minuto · experimente uma amostra e me diga o que achou — é pesquisa, não venda.</p>
       </div>
       <div class="hero-art">
         <svg width="200" height="200" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M162 0H58C25.9675 0 0 25.9675 0 58V162C0 194.033 25.9675 220 58 220H162C194.033 220 220 194.033 220 162V58C220 25.9675 194.033 0 162 0Z" fill="#0B2D4D"/>
@@ -147,9 +173,11 @@
       </div>
     </div>
   </div>
-</div>
+</header>
 
-<section class="block">
+<main id="main">
+
+<section class="block" id="experimentar">
   <div class="wrap">
     <p class="eyebrow">experimente o protótipo (offline)</p>
     <h2 class="title">Inglês de tech, do jeito que aparece nas vagas lá fora</h2>
@@ -160,19 +188,19 @@
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B7B67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
         <h3>Entrevista</h3>
         <p>Perguntas reais de entrevista com tradução, resposta-modelo e áudio.</p>
-        <a class="feat-btn" href="tech-pronto.html#entrevista" target="_blank" rel="noopener">Experimentar →</a>
+        <a class="feat-btn" href="tech-pronto.html#entrevista">Experimentar →</a>
       </div>
       <div class="feat">
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B7B67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
         <h3>Vocabulário</h3>
         <p>Flashcards com os termos reais de tech e pronúncia.</p>
-        <a class="feat-btn" href="tech-pronto.html#vocab" target="_blank" rel="noopener">Experimentar →</a>
+        <a class="feat-btn" href="tech-pronto.html#vocab">Experimentar →</a>
       </div>
       <div class="feat">
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B7B67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
         <h3>Quiz</h3>
         <p>Teste seu inglês de tecnologia com um quiz rápido.</p>
-        <a class="feat-btn" href="tech-pronto.html#quiz" target="_blank" rel="noopener">Experimentar →</a>
+        <a class="feat-btn" href="tech-pronto.html#quiz">Experimentar →</a>
       </div>
     </div>
 
@@ -190,14 +218,15 @@
         <h2>Pesquisa rápida de interesse</h2>
         <p class="lead">Não há nada à venda. Estou tentando entender se isto resolve uma dor real — leva 1 minuto, e a sua resposta ajuda a decidir.</p>
 
+        <!-- anti-spam: campo-armadilha; o Formspree descarta o envio se isto vier preenchido -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;">
+        <input type="hidden" name="_subject" value="Nova resposta — pesquisa Elloqio">
+
         <label for="nome">Nome (opcional)</label>
         <input type="text" id="nome" name="nome" autocomplete="name" placeholder="Como podemos te chamar">
 
-        <label for="email">E-mail ou WhatsApp, se quiser acompanhar (opcional)</label>
-        <input type="text" id="email" name="contato" autocomplete="email" placeholder="seu@email.com ou (11) 9....">
-
         <label for="nivel">Seu nível de inglês hoje</label>
-        <select id="nivel" name="nivel" required>
+        <select id="nivel" name="nivel" required aria-required="true">
           <option value="" disabled selected>Selecione</option>
           <option>Iniciante</option>
           <option>Intermediário</option>
@@ -205,7 +234,7 @@
         </select>
 
         <label for="objetivo">Você tem interesse em trabalhar fora do Brasil?</label>
-        <select id="objetivo" name="objetivo" required>
+        <select id="objetivo" name="objetivo" required aria-required="true">
           <option value="" disabled selected>Selecione</option>
           <option>Sim, estou buscando ativamente</option>
           <option>Talvez, pode ser um plano futuro</option>
@@ -213,15 +242,20 @@
         </select>
 
         <label for="interesse">Você teria interesse em um app que te ajude a se preparar para processos seletivos internacionais?</label>
-        <select id="interesse" name="interesse_app" required>
+        <select id="interesse" name="interesse_app" required aria-required="true">
           <option value="" disabled selected>Selecione</option>
           <option>Sim, com certeza</option>
           <option>Talvez, dependeria</option>
           <option>Não tenho interesse</option>
         </select>
 
+        <div id="contatoWrap" hidden>
+          <label for="email">Quer ser avisado quando lançar? Deixe e-mail ou WhatsApp (opcional)</label>
+          <input type="text" id="email" name="contato" autocomplete="email" inputmode="email" placeholder="seu@email.com ou (11) 9....">
+        </div>
+
         <label for="pagaria">Se esse app existisse, quanto você consideraria justo pagar por mês?</label>
-        <select id="pagaria" name="pagaria" required>
+        <select id="pagaria" name="pagaria" required aria-required="true">
           <option value="" disabled selected>Selecione</option>
           <option>Usaria só se fosse grátis</option>
           <option>Até R$ 19,90</option>
@@ -237,7 +271,12 @@
           </label>
         </div>
 
-        <p class="err" id="formErr">Responda as perguntas obrigatórias e aceite o aviso de privacidade.</p>
+        <div class="progress" aria-hidden="true">
+          <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+          <p class="progress-txt" id="progressTxt">0 de 5 respondidas</p>
+        </div>
+
+        <p class="err" id="formErr" role="alert" aria-live="polite">Responda as perguntas obrigatórias e aceite o aviso de privacidade.</p>
         <button type="submit" class="btn btn-primary submit">Enviar minhas respostas</button>
       </form>
 
@@ -249,10 +288,12 @@
     </div>
 
     <p class="privacy">
-      <b>Aviso de privacidade.</b> Coletamos suas respostas e, se você fornecer, seu nome e contato — apenas para entender o interesse nesta pesquisa e, caso deixe contato, avisar sobre novidades do projeto. Não vendemos nem compartilhamos seus dados com terceiros. Você pode pedir a remoção a qualquer momento pelo contato <a href="mailto:contato@seudominio.com">contato@seudominio.com</a>. Em conformidade com a LGPD.
+      <b>Aviso de privacidade.</b> Coletamos suas respostas e, se você fornecer, seu nome e contato — apenas para entender o interesse nesta pesquisa e, caso deixe contato, avisar sobre novidades do projeto. Não vendemos nem compartilhamos seus dados com terceiros. Você pode pedir a remoção a qualquer momento pelo contato <a href="mailto:elloqio.app@gmail.com">elloqio.app@gmail.com</a>. Em conformidade com a LGPD.
     </p>
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="wrap">
@@ -261,25 +302,65 @@
 </footer>
 
 <script>
-  /* === CONFIG: cole aqui o endpoint do seu formulario (ex.: Formspree) === */
+  /* === CONFIG: endpoint do Formspree === */
   const ENDPOINT = "https://formspree.io/f/xeebknkn";
 
   const form = document.getElementById('leadForm');
   const errEl = document.getElementById('formErr');
   const successEl = document.getElementById('successMsg');
+  const interesse = form.elements['interesse_app'];
+  const contatoWrap = document.getElementById('contatoWrap');
+  const progressBar = document.getElementById('progressBar');
+  const progressTxt = document.getElementById('progressTxt');
+  const REQUIRED = ['nivel','objetivo','interesse_app','pagaria'];
+
+  function showSuccess(){
+    form.style.display = 'none';
+    successEl.style.display = 'block';
+  }
+
+  // Se já respondeu nesta sessão, mostra o agradecimento (evita envio duplicado).
+  try{ if(sessionStorage.getItem('elloqio_enviado') === '1'){ showSuccess(); } }catch(_){}
+
+  // Contato condicional: só aparece para quem marca "Sim, com certeza".
+  function syncContato(){
+    const alto = interesse.value === 'Sim, com certeza';
+    contatoWrap.hidden = !alto;
+    if(!alto){ const c = document.getElementById('email'); if(c) c.value = ''; }
+  }
+
+  // Barra de progresso: 4 selects obrigatórios + consentimento.
+  function updateProgress(){
+    let done = REQUIRED.filter(n => form.elements[n] && form.elements[n].value).length;
+    if(form.consent.checked) done++;
+    const total = REQUIRED.length + 1;
+    if(progressBar) progressBar.style.width = Math.round(done / total * 100) + '%';
+    if(progressTxt) progressTxt.textContent = done + ' de ' + total + ' respondidas';
+  }
+
+  form.addEventListener('change', () => { syncContato(); updateProgress(); });
+  form.addEventListener('input', updateProgress);
+  syncContato(); updateProgress();
 
   form.addEventListener('submit', async function(e){
     e.preventDefault();
     errEl.style.display = 'none';
 
-    const ok = form.interesse_app.value && form.nivel.value && form.objetivo.value && form.pagaria.value && form.consent.checked;
+    let firstInvalid = null;
+    REQUIRED.forEach(n => {
+      const el = form.elements[n];
+      const bad = el && !el.value;
+      if(el) el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+      if(bad && !firstInvalid) firstInvalid = el;
+    });
+    const ok = REQUIRED.every(n => form.elements[n] && form.elements[n].value) && form.consent.checked;
     if(!ok){
       errEl.textContent = 'Responda as perguntas obrigatórias e aceite o aviso de privacidade.';
       errEl.style.display = 'block';
+      if(firstInvalid) firstInvalid.focus();
       return;
     }
 
-    // Enquanto o ENDPOINT não for configurado, avisamos em vez de fingir que salvou.
     if(ENDPOINT.includes('SEU_ID_AQUI')){
       errEl.textContent = 'Formulário ainda não conectado. Configure o ENDPOINT no código antes de publicar.';
       errEl.style.display = 'block';
@@ -293,9 +374,8 @@
     try{
       const res = await fetch(ENDPOINT, { method:'POST', body:new FormData(form), headers:{ 'Accept':'application/json' } });
       if(!res.ok) throw new Error('status ' + res.status);
-      // Só mostra sucesso se o envio realmente deu certo.
-      form.style.display = 'none';
-      successEl.style.display = 'block';
+      try{ sessionStorage.setItem('elloqio_enviado','1'); }catch(_){}
+      showSuccess();
       successEl.scrollIntoView({ behavior:'smooth', block:'center' });
     }catch(err){
       errEl.textContent = 'Não consegui enviar agora. Verifique a conexão e tente novamente.';

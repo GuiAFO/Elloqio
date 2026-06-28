@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="color-scheme" content="light dark" />
 <title>Elloqio · protótipo (amostra offline)</title>
+<meta name="theme-color" content="#0B2D4D" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -27,7 +29,7 @@
 
   .bar{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
   .bar h2{font-size:19px;}
-  .iconbtn{background:var(--card);border:1px solid var(--line);border-radius:10px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);}
+  .iconbtn{background:var(--card);border:1px solid var(--line);border-radius:10px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);}
 
   .modecard{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:12px;cursor:pointer;font-family:inherit;}
   .modecard:hover{border-color:var(--teal);}
@@ -49,7 +51,7 @@
   .btn-nav{flex:1;background:var(--card);border:1px solid var(--line);color:var(--text);}
   .btn-teal{background:var(--teal);color:var(--navy);}
   .counter{text-align:center;font-size:13px;color:var(--muted);margin-top:12px;}
-  .spk{background:rgba(45,226,197,0.14);border:none;color:var(--teal-deep);width:42px;height:42px;border-radius:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .spk{background:rgba(45,226,197,0.14);border:none;color:var(--teal-deep);width:44px;height:44px;border-radius:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 
   .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:14px;}
   .q .prompt{font-family:var(--fd);font-weight:700;font-size:21px;margin-bottom:14px;}
@@ -67,13 +69,21 @@
   .ans .en{font-size:15px;margin-top:4px;}
   .ans .pt{font-size:13px;color:var(--slate);margin-top:5px;}
   .ans .row{margin-top:8px;}
+
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  :focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:6px;}
+  .bar h2:focus{outline:none;}
+  .backsurvey{text-align:center;margin:30px 0 10px;}
+  .backsurvey a{font-family:var(--fd);font-weight:600;font-size:14px;color:var(--teal-deep);text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:11px 16px;display:inline-block;}
+  .backsurvey a:hover{border-color:var(--teal-deep);}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important;}}
   @media (prefers-color-scheme: dark){
     :root{--bg:#0A1722;--card:#13242F;--line:#24333E;--text:#EAF2F5;--slate:#AEBFC9;--muted:#8597A2;--teal-deep:#3FE0C8;}
   }
 </style>
 </head>
 <body>
-<div class="top">
+<header class="top">
   <svg width="30" height="30" viewBox="0 0 220 220" fill="none" aria-hidden="true">
     <path d="M162 0H58C25.97 0 0 25.97 0 58V162C0 194.03 25.97 220 58 220H162C194.03 220 220 194.03 220 162V58C220 25.97 194.03 0 162 0Z" fill="#0B2D4D"/>
     <path opacity="0.55" d="M40 191C60 166 88 159 118 164C148 169 170 152 182 124" stroke="#D9E7EF" stroke-width="7" stroke-linecap="round"/>
@@ -83,41 +93,45 @@
   </svg>
   <span class="nm">Elloqio</span>
   <span class="badge">amostra offline</span>
-</div>
+</header>
 <div class="note">Protótipo ilustrativo para você entender a plataforma. No app completo, a IA conversa e corrige em tempo real.</div>
-<div class="wrap"><div id="app"></div></div>
+<main class="wrap">
+  <h1 class="sr-only">Protótipo Elloqio — amostra offline</h1>
+  <div id="app"></div>
+  <p class="backsurvey"><a href="index.html#entrar">← Voltar e responder à pesquisa</a></p>
+</main>
 
 <script>
 const VOCAB = {
   "Programação": [
-    {en:"Code",pt:"Código",ex:"Write clean code that is easy to read."},
-    {en:"Bug",pt:"Bug / erro",ex:"I found a bug in the login page."},
-    {en:"Debug",pt:"Depurar",ex:"Let's debug this function together."},
-    {en:"Function",pt:"Função",ex:"This function returns the total."},
-    {en:"Variable",pt:"Variável",ex:"Give the variable a clear name."},
-    {en:"Deploy",pt:"Publicar / implantar",ex:"We deploy new code every Friday."},
-    {en:"Framework",pt:"Framework",ex:"We build the app with a modern framework."},
-    {en:"Repository",pt:"Repositório",ex:"Push your changes to the repository."}
+    {en:"Code",pt:"Código",ex:"Write clean code that is easy to read.",exPt:"Escreva um código limpo e fácil de ler."},
+    {en:"Bug",pt:"Bug / erro",ex:"I found a bug in the login page.",exPt:"Encontrei um bug na página de login."},
+    {en:"Debug",pt:"Depurar",ex:"Let's debug this function together.",exPt:"Vamos depurar esta função juntos."},
+    {en:"Function",pt:"Função",ex:"This function returns the total.",exPt:"Esta função retorna o total."},
+    {en:"Variable",pt:"Variável",ex:"Give the variable a clear name.",exPt:"Dê um nome claro à variável."},
+    {en:"Deploy",pt:"Publicar / implantar",ex:"We deploy new code every Friday.",exPt:"Publicamos código novo toda sexta-feira."},
+    {en:"Framework",pt:"Framework",ex:"We build the app with a modern framework.",exPt:"Construímos o app com um framework moderno."},
+    {en:"Repository",pt:"Repositório",ex:"Push your changes to the repository.",exPt:"Envie suas alterações para o repositório."}
   ],
   "Dados & Banco de Dados": [
-    {en:"Database",pt:"Banco de dados",ex:"The data is stored in the database."},
-    {en:"Query",pt:"Consulta (query)",ex:"Run a query to get last month's sales."},
-    {en:"Table",pt:"Tabela",ex:"Each table has rows and columns."},
-    {en:"Dataset",pt:"Conjunto de dados",ex:"Clean the dataset before analysis."},
-    {en:"Dashboard",pt:"Painel (dashboard)",ex:"I built a dashboard to track the KPIs."},
-    {en:"Report",pt:"Relatório",ex:"Send the weekly report to the team."},
-    {en:"Backup",pt:"Backup / cópia",ex:"Always keep a backup of the data."},
-    {en:"Schema",pt:"Esquema (schema)",ex:"The schema defines the data structure."}
+    {en:"Database",pt:"Banco de dados",ex:"The data is stored in the database.",exPt:"Os dados ficam armazenados no banco de dados."},
+    {en:"Query",pt:"Consulta (query)",ex:"Run a query to get last month's sales.",exPt:"Rode uma consulta para obter as vendas do mês passado."},
+    {en:"Table",pt:"Tabela",ex:"Each table has rows and columns.",exPt:"Cada tabela tem linhas e colunas."},
+    {en:"Dataset",pt:"Conjunto de dados",ex:"Clean the dataset before analysis.",exPt:"Limpe o conjunto de dados antes da análise."},
+    {en:"Dashboard",pt:"Painel (dashboard)",ex:"I built a dashboard to track the KPIs.",exPt:"Criei um painel para acompanhar os KPIs."},
+    {en:"Report",pt:"Relatório",ex:"Send the weekly report to the team.",exPt:"Envie o relatório semanal para a equipe."},
+    {en:"Backup",pt:"Backup / cópia",ex:"Always keep a backup of the data.",exPt:"Mantenha sempre um backup dos dados."},
+    {en:"Schema",pt:"Esquema (schema)",ex:"The schema defines the data structure.",exPt:"O esquema define a estrutura dos dados."}
   ],
   "Equipe Ágil": [
-    {en:"Sprint",pt:"Sprint (ciclo)",ex:"This task is for the next sprint."},
-    {en:"Standup / daily",pt:"Reunião diária",ex:"We have a quick standup every morning."},
-    {en:"Deadline",pt:"Prazo",ex:"The deadline is end of the week."},
-    {en:"Task",pt:"Tarefa",ex:"I finished my task early."},
-    {en:"Ticket",pt:"Chamado / ticket",ex:"Open a ticket for that bug."},
-    {en:"Code review",pt:"Revisão de código",ex:"Please do a code review on my pull request."},
-    {en:"Merge",pt:"Mesclar (merge)",ex:"Merge your branch after the review."},
-    {en:"Backlog",pt:"Backlog (pendências)",ex:"That feature is still in the backlog."}
+    {en:"Sprint",pt:"Sprint (ciclo)",ex:"This task is for the next sprint.",exPt:"Esta tarefa é para o próximo sprint."},
+    {en:"Standup / daily",pt:"Reunião diária",ex:"We have a quick standup every morning.",exPt:"Temos uma reunião diária rápida toda manhã."},
+    {en:"Deadline",pt:"Prazo",ex:"The deadline is end of the week.",exPt:"O prazo é o fim da semana."},
+    {en:"Task",pt:"Tarefa",ex:"I finished my task early.",exPt:"Terminei minha tarefa mais cedo."},
+    {en:"Ticket",pt:"Chamado / ticket",ex:"Open a ticket for that bug.",exPt:"Abra um chamado para esse bug."},
+    {en:"Code review",pt:"Revisão de código",ex:"Please do a code review on my pull request.",exPt:"Por favor, faça a revisão de código no meu pull request."},
+    {en:"Merge",pt:"Mesclar (merge)",ex:"Merge your branch after the review.",exPt:"Faça o merge da sua branch após a revisão."},
+    {en:"Backlog",pt:"Backlog (pendências)",ex:"That feature is still in the backlog.",exPt:"Essa funcionalidade ainda está no backlog."}
   ]
 };
 const CATS = Object.keys(VOCAB);
@@ -150,7 +164,7 @@ const BACK='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="
 
 const S={vCat:CATS[0],vIdx:0,vFlip:false,qList:[],qIdx:0,qPick:null,qScore:0};
 const app=document.getElementById("app");
-function set(h){app.innerHTML=h;scrollTo(0,0);}
+function set(h,opts){opts=opts||{};app.innerHTML=h;if(opts.keepScroll)return;scrollTo(0,0);const hd=app.querySelector(".bar h2, h2");if(hd){hd.setAttribute("tabindex","-1");hd.focus({preventScroll:true});}}
 
 function home(){
   location.hash="";
@@ -168,22 +182,22 @@ function icon(id){
   if(id==="quiz")return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B7B67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
   return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B7B67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
 }
-function topbar(title){return '<div class="bar"><button class="iconbtn" data-go="home">'+BACK+'</button><h2>'+esc(title)+'</h2></div>';}
+function topbar(title){return '<div class="bar"><button class="iconbtn" data-go="home" aria-label="Voltar">'+BACK+'</button><h2>'+esc(title)+'</h2></div>';}
 
-function vocab(){
+function vocab(keep){
   location.hash="vocab";
   const list=VOCAB[S.vCat],c=list[S.vIdx];
   set(topbar("Vocabulário técnico")+
-    '<div class="pills">'+CATS.map(cat=>'<button class="pill'+(cat===S.vCat?' on':'')+'" data-cat="'+esc(cat)+'">'+esc(cat)+'</button>').join('')+'</div>'+
+    '<div class="pills">'+CATS.map(cat=>'<button class="pill'+(cat===S.vCat?' on':'')+'" data-cat="'+esc(cat)+'" aria-pressed="'+(cat===S.vCat)+'">'+esc(cat)+'</button>').join('')+'</div>'+
     '<div class="flash" data-flip>'+
       (!S.vFlip
-        ? '<div class="en">'+esc(c.en)+'</div><div class="hint">toque para ver a tradução</div>'
-        : '<div class="pt">'+esc(c.pt)+'</div><div class="ex">"'+esc(c.ex)+'"</div><div class="hint">toque para voltar</div>')+
+        ? '<div class="en">'+esc(c.en)+'</div><div class="ex">"'+esc(c.ex)+'"</div><div class="hint">toque para ver a tradução</div>'
+        : '<div class="pt">'+esc(c.pt)+'</div><div class="ex">"'+esc(c.exPt)+'"</div><div class="hint">toque para voltar</div>')+
     '</div>'+
     '<div class="row"><button class="btn btn-nav" data-v="prev">‹ Anterior</button>'+
-      '<button class="spk" data-spk="'+esc(c.en)+'" title="Ouvir">'+SPK+'</button>'+
+      '<button class="spk" data-spk="'+esc(c.en)+'" title="Ouvir" aria-label="Ouvir pronúncia">'+SPK+'</button>'+
       '<button class="btn btn-nav" data-v="next">Próximo ›</button></div>'+
-    '<div class="counter">'+(S.vIdx+1)+' / '+list.length+'</div>');
+    '<div class="counter">'+(S.vIdx+1)+' / '+list.length+'</div>', keep?{keepScroll:true}:undefined);
 }
 
 function quizHome(){
@@ -203,11 +217,11 @@ function buildQuiz(pool){
   });
 }
 function startQuiz(scope){const pool=scope==="__all__"?ALL:VOCAB[scope];S.qList=buildQuiz(pool);S.qIdx=0;S.qPick=null;S.qScore=0;quiz();}
-function quiz(){
+function quiz(keep){
   if(S.qIdx>=S.qList.length){
     const pct=Math.round(S.qScore/S.qList.length*100);
     const msg=pct>=80?"Excelente! Você está afiado.":pct>=50?"Bom trabalho. Siga praticando!":"Continue treinando — melhora rápido.";
-    set(topbar("Resultado")+'<div class="result"><div class="big">'+S.qScore+'/'+S.qList.length+'</div><p style="margin:8px 0 18px">'+msg+'</p><button class="btn btn-teal" data-go="quiz">Tentar de novo</button></div>');
+    set(topbar("Resultado")+'<div class="result"><div class="big">'+S.qScore+'/'+S.qList.length+'</div><p style="margin:8px 0 18px">'+msg+'</p><button class="btn btn-teal" data-go="quiz">Tentar de novo</button></div>', keep?{keepScroll:true}:undefined);
     return;
   }
   const q=S.qList[S.qIdx],answered=S.qPick!==null;
@@ -215,7 +229,7 @@ function quiz(){
     '<div class="q"><div class="muted" style="font-size:12.5px;margin-bottom:6px">'+(q.dir==="en2pt"?"Traduza para o português:":"Traduza para o inglês:")+'</div>'+
     '<div class="prompt">'+esc(q.prompt)+'</div>'+
     q.options.map(opt=>{let cls="opt";if(answered){if(opt===q.correct)cls+=" ok";else if(opt===S.qPick)cls+=" no";}return '<button class="'+cls+'" data-opt="'+esc(opt)+'"'+(answered?" disabled":"")+'>'+esc(opt)+'</button>';}).join('')+
-    '</div>'+(answered?'<button class="btn btn-teal" style="width:100%" data-q="next">Continuar ›</button>':''));
+    '</div>'+(answered?'<button class="btn btn-teal" style="width:100%" data-q="next">Continuar ›</button>':''), keep?{keepScroll:true}:undefined);
 }
 
 function interview(){
@@ -223,9 +237,9 @@ function interview(){
   set(topbar("Entrevista · exemplo")+
     '<p class="muted" style="margin:0 0 18px;font-size:14px">Exemplo ilustrativo de uma entrevista técnica. No app completo, você responde e a IA corrige o seu inglês em tempo real.</p>'+
     IV.map(t=>'<div class="turn">'+
-      '<div class="ask">'+esc(t.q)+'<button class="spk" data-spk="'+esc(t.q)+'" style="width:30px;height:30px;float:right;margin:-2px 0 0 8px" title="Ouvir">'+SPK+'</button><div class="pt">'+esc(t.qpt)+'</div></div>'+
+      '<div class="ask">'+esc(t.q)+'<button class="spk" data-spk="'+esc(t.q)+'" style="width:30px;height:30px;float:right;margin:-2px 0 0 8px" title="Ouvir" aria-label="Ouvir a pergunta">'+SPK+'</button><div class="pt">'+esc(t.qpt)+'</div></div>'+
       '<div class="ans"><div class="lbl">resposta-modelo</div><div class="en">'+esc(t.a)+'</div><div class="pt">'+esc(t.apt)+'</div>'+
-        '<div class="row"><button class="spk" data-spk="'+esc(t.a)+'" title="Ouvir">'+SPK+'</button></div></div>'+
+        '<div class="row"><button class="spk" data-spk="'+esc(t.a)+'" title="Ouvir" aria-label="Ouvir a resposta">'+SPK+'</button></div></div>'+
     '</div>').join(''));
 }
 
@@ -234,11 +248,11 @@ document.addEventListener("click",e=>{
   if(!t)return;
   if(t.dataset.spk!==undefined){speak(t.dataset.spk);return;}
   if(t.dataset.go!==undefined){const g=t.dataset.go;if(g==="home")home();else if(g==="vocab")vocab();else if(g==="quiz")quizHome();else if(g==="entrevista")interview();return;}
-  if(t.dataset.flip!==undefined){S.vFlip=!S.vFlip;vocab();return;}
-  if(t.dataset.cat!==undefined){S.vCat=t.dataset.cat;S.vIdx=0;S.vFlip=false;vocab();return;}
-  if(t.dataset.v!==undefined){const n=VOCAB[S.vCat].length;S.vIdx=t.dataset.v==="next"?(S.vIdx+1)%n:(S.vIdx-1+n)%n;S.vFlip=false;vocab();return;}
+  if(t.dataset.flip!==undefined){S.vFlip=!S.vFlip;vocab(true);return;}
+  if(t.dataset.cat!==undefined){S.vCat=t.dataset.cat;S.vIdx=0;S.vFlip=false;vocab(true);return;}
+  if(t.dataset.v!==undefined){const n=VOCAB[S.vCat].length;S.vIdx=t.dataset.v==="next"?(S.vIdx+1)%n:(S.vIdx-1+n)%n;S.vFlip=false;vocab(true);return;}
   if(t.dataset.q!==undefined){if(t.dataset.q==="next"){S.qIdx++;S.qPick=null;quiz();}else startQuiz(t.dataset.q);return;}
-  if(t.dataset.opt!==undefined){if(S.qPick!==null)return;S.qPick=t.dataset.opt;if(t.dataset.opt===S.qList[S.qIdx].correct)S.qScore++;quiz();return;}
+  if(t.dataset.opt!==undefined){if(S.qPick!==null)return;S.qPick=t.dataset.opt;if(t.dataset.opt===S.qList[S.qIdx].correct)S.qScore++;quiz(true);return;}
 });
 
 function route(){const h=location.hash.replace("#","");if(h==="vocab")vocab();else if(h==="quiz")quizHome();else if(h==="entrevista")interview();else home();}
