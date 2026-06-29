@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark" />
 <title>Elloqio · protótipo (amostra offline)</title>
 <meta name="theme-color" content="#0B2D4D" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; img-src 'self' data: https://elloqio.goatcounter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://gc.zgo.at; connect-src https://elloqio.goatcounter.com;" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -258,5 +258,7 @@ document.addEventListener("click",e=>{
 function route(){const h=location.hash.replace("#","");if(h==="vocab")vocab();else if(h==="quiz")quizHome();else if(h==="entrevista")interview();else home();}
 route();
 </script>
+<!-- GoatCounter (analytics sem cookies) -->
+<script data-goatcounter="https://elloqio.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
